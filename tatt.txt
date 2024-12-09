@@ -1,0 +1,31 @@
+-- Auto Click Script for Blox Fruits
+-- Note: Use it responsibly, violating Roblox TOS may result in bans.
+
+local player = game.Players.LocalPlayer
+local tool = nil
+
+-- Check if the player has a tool (weapon)
+local function getTool()
+    if player.Character and player.Character:FindFirstChildOfClass("Tool") then
+        return player.Character:FindFirstChildOfClass("Tool")
+    end
+    return nil
+end
+
+-- Auto click function
+local function autoClick()
+    while true do
+        tool = getTool()
+        if tool then
+            local clickEvent = tool:FindFirstChild("RemoteEvent") or tool:FindFirstChild("RemoteFunction")
+            if clickEvent then
+                clickEvent:FireServer()
+            end
+        end
+        wait(0.1) -- Adjust click speed here
+    end
+end
+
+-- Auto-start the script
+print("Auto Click Activated")
+autoClick()
